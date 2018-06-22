@@ -2,38 +2,39 @@
     <div class="app-wrapper">
         <home-header></home-header>
         <top-channel></top-channel>
-        <scroller :class="['main-list']" offset-accuracy="300" loadmoreoffset="300" 
-        @loadmore="onloadmore">
-            <!-- <refresher @loadingDown="loadingDown"></refresher> -->
-            <text>1</text>
-            <text>1</text>
-            <text>1</text>
-            <text>1</text>
-            <text>1</text>
-            <text>1</text>
-            <text>1</text>
-            <text>1</text>
-            <text>1</text>
-            <text>1</text>
-            <text>1</text>
-            <text>1</text>
-            <text>1</text>
-            <text>1</text>
-            <text>1</text>
-            <text>1</text>
-            <text>1</text>
-            <text>1</text>
-            <text>1</text>
-            <text>1</text>
-            <text>1</text>
-            <text>1</text>
-            <text>1</text>
+        <scroller class="scroller" @loadmore="fetch" loadmoreoffset="10" >
+            <div v-for="(num, i) in lists" :key="i">
+            <div class="panel">
+                <text class="text">{{num}}</text>
+            </div>
+            </div>
         </scroller>
 
     </div>
 </template>
 
 <style scoped>
+.scroller {
+    height: 500px;
+}
+.panel {
+    width: 600px;
+    height: 250px;
+    margin-left: 75px;
+    margin-top: 35px;
+    margin-bottom: 35px;
+    flex-direction: column;
+    justify-content: center;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(162, 217, 192);
+    background-color: rgba(162, 217, 192, 0.2);
+  }
+  .text {
+    font-size: 100px;
+    text-align: center;
+    color: #41B883;
+  }
     .main-list{
         position: fixed;
         top: 168px;
@@ -66,6 +67,7 @@
                     title:'品牌SS制造商直供',
                     items: []
                 },
+                lists: [1, 2, 3, 4, 5]
             }
         },
         created() {
@@ -78,6 +80,15 @@
         methods: {
             onloadmore() {
                 modal.toast({ message: 'loading', duration: 0.3 })
+            },
+            fetch() {
+                modal.toast({ message: 'loading', duration: 0.3 })
+                setTimeout(() => {
+          const length = this.lists.length
+          for (let i = length; i < length + 4; ++i) {
+            this.lists.push(i + 1)
+          }
+        }, 800)
             }
         }
     }

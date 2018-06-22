@@ -1,4 +1,4 @@
-let stream = weex.registerModule('stream');
+let stream = weex.requireModule('stream');
 export default {
     methods: {
         jump(to) {
